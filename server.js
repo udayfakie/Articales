@@ -35,6 +35,6 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-app.listen(PORT, function() { 
+app.listen(process.env.PORT || 3001 , function() { 
   console.log(`Server listening on port ${PORT}.`);
 });
