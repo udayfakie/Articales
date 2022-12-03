@@ -31,7 +31,7 @@ const Navigation = () => {
       <div className="container">
         <ul className="navbar-nav mr-auto">
           <li className="nav-item">
-            <NavLink className="nav-link" to="/articles">
+            <NavLink className="nav-link" to="/">
               Articles
             </NavLink>
           </li>
@@ -44,7 +44,7 @@ const Navigation = () => {
 const Main = () => {
   return (
     <Routes>
-      <Route path="/articles" element={<ArticleList />} />
+      <Route path="/" element={<ArticleList />} />
       <Route path="/articles/new" element={<ArticleAdd />} />
       <Route path="/articles/:_id" element={<ArticleInfo />} />
       <Route path="/articles/:_id/edit" element={<ArticleEdit />} />
