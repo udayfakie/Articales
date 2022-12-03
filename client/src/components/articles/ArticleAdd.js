@@ -1,55 +1,94 @@
+import React, { useState } from "react";
+import { post } from "axios";
+import { useNavigate } from "react-router-dom";
+import { Container } from "react-bootstrap";
 
-import React, { useState } from "react";               
-import { post } from 'axios';     
-import {useNavigate} from 'react-router-dom'    ;                 
-
-function ArticleAdd(props) {
-  const initialState = { title: '', content: '' }
-  const [article, setArticle] = useState(initialState)
+const ArticleAdd = (props) => {
+  const initialState = { title: "", content: "" };
+  const [article, setArticle] = useState(initialState);
   const navigate = useNavigate();
 
-  function handleChange(event) {                      
-    setArticle({...article, [event.target.name]: event.target.value})
-  }
+  const handleChange = (event) => {
+    setArticle({ ...article, [event.target.name]: event.target.value });
+  };
 
-  function handleSubmit(event) {                       
-    event.preventDefault();                            
-    if(!article.title || !article.content ) return     
-    async function postArticle() {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (!article.title || !article.content) return;
+    const postArticle = async () => {
       try {
-        const response = await post('/api/articles', article);
-        navigate(`/articles/${response.data._id}`); 
-      } catch(error) {
-        console.log('error', error);
+        const response = await post("/api/articles", article);
+        navigate(`/articles/${response.data._id}`);
+      } catch (error) {
+        console.log("error", error);
       }
-    }
+    };
     postArticle();
-  }
+  };
 
-  function handleCancel() {
+  const handleCancel = () => {
     navigate("/articles");
-  }
+  };
 
-  return (                                            
-    <div>
-      <h1>Create Article</h1>
-      <hr/>
+  return (
+    <Container>
+      <h1 style={{ color: "#343a40", textAlign: "center" }}>Create Article</h1>
+      <hr />
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label>Title</label>
-          <input name="title" type="text" value={article.title} onChange={handleChange} className="form-control" />
+          <label style={{ fontWeight: 700, color: "#000" }}>Title</label>
+          <input
+            style={{
+              backgroundColor: "#7e767680",
+              color: "#000",
+              fontWeight: 500,
+              width: "350px",
+            }}
+            name="title"
+            type="text"
+            value={article.title}
+            onChange={handleChange}
+            className="form-control"
+          />
         </div>
         <div className="form-group">
-          <label>Content</label>
-          <textarea name="content" rows="5" value={article.content} onChange={handleChange} className="form-control" />
+          <label
+            style={{
+              fontWeight: 700,
+              color: "#000",
+              justifyContent: "center",
+              textAlign: "center",
+            }}
+          >
+            Content
+          </label>
+          <textarea
+            style={{
+              backgroundColor: "#7e767680",
+              color: "#000",
+              fontWeight: 500,
+              width: "350px",
+            }}
+            name="content"
+            rows="5"
+            value={article.content}
+            onChange={handleChange}
+            className="form-control"
+          />
         </div>
         <div className="btn-group">
-          <input type="submit" value="Submit" className="btn btn-primary" />
-          <button type="button" onClick={handleCancel} className="btn btn-secondary">Cancel</button>
+          <input type="submit" value="Submit" className="btn btn-dark" />
+          <button
+            type="button"
+            onClick={handleCancel}
+            className="btn btn-secondary"
+          >
+            Cancel
+          </button>
         </div>
       </form>
-    </div>
+    </Container>
   );
-}
+};
 
-export default ArticleAdd
+export default ArticleAdd;
