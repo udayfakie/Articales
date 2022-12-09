@@ -11,6 +11,7 @@ import ArticleInfo from "./components/articles/ArticleInfo";
 import ArticleAdd from "./components/articles/ArticleAdd";
 import ArticleEdit from "./components/articles/ArticleEdit";
 import "bootstrap/dist/css/bootstrap.css";
+import Home from "./components/pages/Home";
 
 const App = () => {
   return (
@@ -44,7 +45,8 @@ const Navigation = () => {
 const Main = () => {
   return (
     <Routes>
-      <Route path="/" element={<ArticleList />} />
+     <Route path="/" element={<Home/>} />
+      <Route path="/articles" element={<ArticleList />} />
       <Route path="/articles/new" element={<ArticleAdd />} />
       <Route path="/articles/:_id" element={<ArticleInfo />} />
       <Route path="/articles/:_id/edit" element={<ArticleEdit />} />
